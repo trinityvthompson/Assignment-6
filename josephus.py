@@ -12,7 +12,7 @@ class CircularList(object):
     self.last = None # Points to the last node in the circular linked list
 
   # Insert a soldier at the end of the circular linked list
-  def insert ( self, data):
+  def insert(self, data):
     new_link = Link(data)
     if self.last is None:
       # If the list is empty, point the new link to itself (circular)
@@ -26,7 +26,7 @@ class CircularList(object):
 
   # Find the Link with the given data (value)
   # or return None if the data is not there
-  def find (self, data):
+  def find(self, data):
     if self.last is None:
       return None # List is empty
     
@@ -41,7 +41,7 @@ class CircularList(object):
   
   # Delete a Link with a given data (value) and return the Link
   # or return None if the data is not there
-  def delete ( self, data ):
+  def delete(self, data):
     if self.last is None:
       return None # List is empty
     
@@ -69,7 +69,7 @@ class CircularList(object):
   # Delete the nth Link starting from the Link start
   # Return the data of the deleted Link AND return the
   # next Link after the deleted Link in that order
-  def delete_after ( self, start, n ):
+  def delete_after(self, start, n):
     curr = start
 
     # Move n-1 steps to find the nth soldier
@@ -86,7 +86,7 @@ class CircularList(object):
   # Return a string representation of a Circular List
   # The format of the string will be the same as the __str__
   # format for normal Python lists
-  def __str__ ( self ):
+  def __str__(self):
     if self.last is None:
       return "[]"
     
