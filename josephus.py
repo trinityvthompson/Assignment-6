@@ -11,7 +11,7 @@ class Link:
     self.data = data # Soldier number
     self.next = None # Pointer to the next link (soldier)
 
-class CircularList(object):
+class CircularList:
   """
   This class represents a circular linked list of soldiers.
   """
@@ -43,7 +43,7 @@ class CircularList(object):
     """
     if self.last is None:
       return None # List is empty
-    
+
     curr = self.last.next # Start from the first soldier
     while True:
       if curr.data == data:
@@ -52,23 +52,24 @@ class CircularList(object):
       if curr == self.last.next:
         break # Circled back to the start
     return None # Soldier not found
-  
-  # Delete a Link with a given data (value) and return the Link
-  # or return None if the data is not there
+
   def delete(self, data):
+    """
+    Delete a link with a given data and return the link or return None if not found.
+    """
     if self.last is None:
       return None # List is empty
-    
+
     curr = self.last.next
     prev = self.last
 
     # Loop to find the link to delete
     while curr.data != data:
       if curr == self.last: # If we've checked the entire list
-        return None 
+        return None
       prev = curr
       curr = curr.next
-    
+
     # If there is only one link
     if curr == self.last and curr.next == self.last:
       self.last = None
@@ -76,10 +77,10 @@ class CircularList(object):
       # Bypass the current link
       prev.next = curr.next
       if curr == self.last:
-        self.last = prev # Updating last pointer if deleting last node 
-      
+        self.last = prev # Updating last pointer if deleting last node
+
     return curr
-      
+
   # Delete the nth Link starting from the Link start
   # Return the data of the deleted Link AND return the
   # next Link after the deleted Link in that order
@@ -89,12 +90,12 @@ class CircularList(object):
     # Move n-1 steps to find the nth soldier
     for _ in range(n - 1):
       curr = curr.next
-    
+
     # Delete the current soldier
     deleted_data = curr.data
     self.delete(curr.data)
 
-    # Return the deleted soldier's data and the next soldier 
+    # Return the deleted soldier's data and the next soldier
     return deleted_data, curr.next
 
   # Return a string representation of a Circular List
@@ -103,7 +104,7 @@ class CircularList(object):
   def __str__(self):
     if self.last is None:
       return "[]"
-    
+
     curr = self.last.next
     result = []
     while True:
@@ -134,7 +135,7 @@ def main():
   circular_list = CircularList()
   for soldier in range(1, num_soldiers + 1):
     circular_list.insert(soldier)
-  
+
   # Find the starting soldier
   start_link = circular_list.find(start_count)
 
@@ -143,7 +144,7 @@ def main():
   for _ in range(num_soldiers - 1): # We need to elimate all but one soldier
     eliminated, curr_link = circular_list.delete_after(curr_link, elim_num)
     print(eliminated)
-  
+
   # Print the last soldier remaining
   print(curr_link.data)
 
