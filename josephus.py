@@ -1,3 +1,11 @@
+"""
+Assignment 6
+Trinity Thompson tyt242
+Marissa Shuchart ms87339
+
+This program solves the Josephus problem using a circular linked list, determining the order in which soldiers
+are eliminated from a circle until only one soldier remains.
+"""
 import sys
 
 class Link:
@@ -81,10 +89,10 @@ class CircularList:
 
     return curr
 
-  # Delete the nth Link starting from the Link start
-  # Return the data of the deleted Link AND return the
-  # next Link after the deleted Link in that order
   def delete_after(self, start, n):
+    """
+    Delete the nth Link starting from the Link start and return the data of the deleted link and the next link.
+    """
     curr = start
 
     # Move n-1 steps to find the nth soldier
@@ -98,10 +106,10 @@ class CircularList:
     # Return the deleted soldier's data and the next soldier
     return deleted_data, curr.next
 
-  # Return a string representation of a Circular List
-  # The format of the string will be the same as the __str__
-  # format for normal Python lists
   def __str__(self):
+    """
+    Return a string representation of a Circular List.
+    """
     if self.last is None:
       return "[]"
 
