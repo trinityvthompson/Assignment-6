@@ -125,13 +125,13 @@ class CircularList:
 
     return "[" + ", ".join(result) + "]"
 
-def main():
 """
 The main function reads input for the number of soldiers, the starting soldier,
 and the elimination number from stdin. It creates a circular linked list of soldiers,
 processes the elimination in the Josephus problem, and prints the order in which 
 the soldiers are eliminated, followed by the number of the last remaining soldier.
 """
+def main():
   # read number of soldiers
   line = sys.stdin.readline()
   line = line.strip()
