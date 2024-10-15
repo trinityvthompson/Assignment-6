@@ -51,15 +51,15 @@ class CircularList:
         Find the link with the given data, or return None if not found.
         """
         if self.last is None:
-          return None # List is empty
+            return None # List is empty
 
         curr = self.last.next # Start from the first soldier
         while True:
-          if curr.data == data:
-            return curr # Soldier found
-          curr = curr.next
-          if curr == self.last.next:
-            break # Circled back to the start
+            if curr.data == data:
+                return curr # Soldier found
+            curr = curr.next
+            if curr == self.last.next:
+                break # Circled back to the start
 
         return None # Soldier not found
 
@@ -68,26 +68,26 @@ class CircularList:
         Delete a link with a given data and return the link or return None if not found.
         """
         if self.last is None:
-          return None # List is empty
+            return None # List is empty
 
         curr = self.last.next
         prev = self.last
 
         # Loop to find the link to delete
         while curr.data != data:
-          if curr == self.last: # If we've checked the entire list
-            return None
-          prev = curr
-          curr = curr.next
+            if curr == self.last: # If we've checked the entire list
+                return None
+            prev = curr
+            curr = curr.next
 
         # If there is only one link
         if curr == self.last and curr.next == self.last:
-          self.last = None
+            self.last = None
         else:
           # Bypass the current link
-          prev.next = curr.next
-          if curr == self.last:
-            self.last = prev # Updating last pointer if deleting last node
+            prev.next = curr.next
+            if curr == self.last:
+                self.last = prev # Updating last pointer if deleting last node
 
         return curr
 
@@ -100,7 +100,7 @@ class CircularList:
 
         # Move n-1 steps to find the nth soldier
         for _ in range(n - 1):
-          curr = curr.next
+            curr = curr.next
 
         # Delete the current soldier
         deleted_data = curr.data
@@ -114,15 +114,15 @@ class CircularList:
         Return a string representation of a Circular List.
         """
         if self.last is None:
-          return "[]"
+            return "[]"
 
         curr = self.last.next
         result = []
         while True:
-          result.append(str(curr.data))
-          curr = curr.next
-          if curr == self.last.next:
-            break
+            result.append(str(curr.data))
+            curr = curr.next
+            if curr == self.last.next:
+                break
 
         return "[" + ", ".join(result) + "]"
 
@@ -151,7 +151,7 @@ def main():
     # Create the circular linked list and populate with soldiers
     circular_list = CircularList()
     for soldier in range(1, num_soldiers + 1):
-      circular_list.insert(soldier)
+        circular_list.insert(soldier)
 
     # Find the starting soldier
     start_link = circular_list.find(start_count)
@@ -159,8 +159,8 @@ def main():
     # Print the elimination order
     curr_link = start_link
     for _ in range(num_soldiers - 1): # We need to elimate all but one soldier
-      eliminated, curr_link = circular_list.delete_after(curr_link, elim_num)
-      print(eliminated)
+        eliminated, curr_link = circular_list.delete_after(curr_link, elim_num)
+        print(eliminated)
 
     # Print the last soldier remaining
     print(curr_link.data)
