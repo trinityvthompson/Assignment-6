@@ -1,50 +1,137 @@
 import sys
 
+# Define the node class for the circular linked list
 class Link(object):
-
+  def __init__(self, data):
+    self.data = data # Soldier number
+    self.next = None # Pointer to the next link (soldier)
 
 class CircularList(object):
   # Constructor
   def __init__ ( self ):
+    self.last = None # Points to the last node in the circular linked list
 
-  # Insert an element (value) in the list
-  def insert ( self, data ):
+  # Insert a soldier at the end of the circular linked list
+  def insert ( self, data):
+    new_link = Link(data)
+    if self.last is None:
+      # If the list is empty, point the new link to itself (circular)
+      self.last = new_link
+      self.last.next = self.last
+    else:
+      # Insert a new link and adjust the pointers to maintain the circular structure
+      new_link.next = self.last.next
+      self.last.next = new_link
+      self.last = new_link
 
   # Find the Link with the given data (value)
   # or return None if the data is not there
-  def find ( self, data ):
-
+  def find (self, data):
+    if self.last is None:
+      return None # List is empty
+    
+    curr = self.last.next # Start from the first soldier
+    while True:
+      if curr.data == data:
+        return curr # Soldier found
+      curr = curr.next
+      if curr == self.last.next:
+        break # Circled back to the start
+    return None # Soldier not found
+  
   # Delete a Link with a given data (value) and return the Link
   # or return None if the data is not there
   def delete ( self, data ):
+    if self.last is None:
+      return None # List is empty
+    
+    curr = self.last.next
+    prev = self.last
 
+    # Loop to find the link to delete
+    while curr.data != data:
+      if curr == self.last: # If we've checked the entire list
+        return None 
+      prev = curr
+      curr = curr.next
+    
+    # If there is only one link
+    if curr == self.last and curr.next == self.last:
+      self.last = None
+    else:
+      # Bypass the current link
+      prev.next = curr.next
+      if curr == self.last:
+        self.last = prev # Updating last pointer if deleting last node 
+      
+    return curr
+      
   # Delete the nth Link starting from the Link start
   # Return the data of the deleted Link AND return the
   # next Link after the deleted Link in that order
   def delete_after ( self, start, n ):
+    curr = start
+
+    # Move n-1 steps to find the nth soldier
+    for i in range(n - 1):
+      curr = curr.next
+    
+    # Delete the current soldier
+    deleted_data = curr.data
+    self.delete(curr.data)
+
+    # Return the deleted soldier's data and the next soldier 
+    return deleted_data, curr.next
 
   # Return a string representation of a Circular List
   # The format of the string will be the same as the __str__
   # format for normal Python lists
   def __str__ ( self ):
+    if self.last is None:
+      return "[]"
+    
+    curr = self.last.next
+    result = []
+    while True:
+      result.append(str(curr.data))
+      curr = curr.next
+      if curr == self.last.next:
+        break
+
+    return "[" + ", ".join(result) + "]"
 
 def main():
   # read number of soldiers
   line = sys.stdin.readline()
   line = line.strip()
-  num_soldiers = int (line)
+  num_soldiers = int(line)
 
   # read the starting number
   line = sys.stdin.readline()
   line = line.strip()
-  start_count = int (line)
+  start_count = int(line)
 
   # read the elimination number
   line = sys.stdin.readline()
   line = line.strip()
-  elim_num = int (line)
+  elim_num = int(line)
 
-  # your code
+  # Create the circular linked list and populate with soldiers
+  circular_list = CircularList()
+  for soldier in range(1, num_soldiers + 1):
+    circular_list.insert(soldier)
+  
+  # Find the starting soldier
+  start_link = circular_list.find(start_count)
+
+  # Print the elimination order
+  curr_link = start_link
+  for c in range(num_soldiers - 1): # We need to elimate all but one soldier
+    eliminated, curr_link = circular_list.delete_after(curr_link, elim_num)
+    print(eliminated)
+  
+  # Print the last soldier remaining
+  print(f"Last soldier remaining: {curr_link.data}")
 
 if __name__ == "__main__":
   main()
