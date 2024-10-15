@@ -3,8 +3,9 @@ Assignment 6
 Trinity Thompson tyt242
 Marissa Shuchart ms87339
 
-This program solves the Josephus problem using a circular linked list, determining the order in which soldiers
-are eliminated from a circle until only one soldier remains.
+This program solves the Josephus problem using a circular linked list, 
+determining the order in which soldiers are eliminated from a circle until 
+only one soldier remains.
 """
 import sys
 
@@ -91,7 +92,8 @@ class CircularList:
 
   def delete_after(self, start, n):
     """
-    Delete the nth Link starting from the Link start and return the data of the deleted link and the next link.
+    Delete the nth Link starting from the Link start and return the data 
+    of the deleted link and the next link.
     """
     curr = start
 
@@ -124,6 +126,12 @@ class CircularList:
     return "[" + ", ".join(result) + "]"
 
 def main():
+"""
+The main function reads input for the number of soldiers, the starting soldier,
+and the elimination number from stdin. It creates a circular linked list of soldiers,
+processes the elimination in the Josephus problem, and prints the order in which 
+the soldiers are eliminated, followed by the number of the last remaining soldier.
+"""
   # read number of soldiers
   line = sys.stdin.readline()
   line = line.strip()
