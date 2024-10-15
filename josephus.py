@@ -1,18 +1,31 @@
 import sys
 
-# Define the node class for the circular linked list
-class Link(object):
+class Link:
+  """
+  This class represents a single link (node) in a circular linked list.
+  """
   def __init__(self, data):
+    """
+    Initialize a new link with given data.
+    """
     self.data = data # Soldier number
     self.next = None # Pointer to the next link (soldier)
 
 class CircularList(object):
+  """
+  This class represents a circular linked list of soldiers.
+  """
   # Constructor
   def __init__ ( self ):
+    """
+    Initialize the CircularList with no soldiers.
+    """
     self.last = None # Points to the last node in the circular linked list
 
-  # Insert a soldier at the end of the circular linked list
   def insert(self, data):
+    """
+    Insert a soldier at the end of the circular linked list.
+    """
     new_link = Link(data)
     if self.last is None:
       # If the list is empty, point the new link to itself (circular)
@@ -24,9 +37,10 @@ class CircularList(object):
       self.last.next = new_link
       self.last = new_link
 
-  # Find the Link with the given data (value)
-  # or return None if the data is not there
   def find(self, data):
+    """
+    Find the link with the given data, or return None if not found.
+    """
     if self.last is None:
       return None # List is empty
     
@@ -73,7 +87,7 @@ class CircularList(object):
     curr = start
 
     # Move n-1 steps to find the nth soldier
-    for i in range(n - 1):
+    for _ in range(n - 1):
       curr = curr.next
     
     # Delete the current soldier
@@ -126,12 +140,12 @@ def main():
 
   # Print the elimination order
   curr_link = start_link
-  for c in range(num_soldiers - 1): # We need to elimate all but one soldier
+  for _ in range(num_soldiers - 1): # We need to elimate all but one soldier
     eliminated, curr_link = circular_list.delete_after(curr_link, elim_num)
     print(eliminated)
   
   # Print the last soldier remaining
-  print(f"Last soldier remaining: {curr_link.data}")
+  print(curr_link.data)
 
 if __name__ == "__main__":
   main()
